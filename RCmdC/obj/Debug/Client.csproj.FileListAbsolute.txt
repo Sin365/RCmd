@@ -1,0 +1,6 @@
+D:\AxibugRCMD\Client\bin\Debug\Client.exe
+D:\AxibugRCMD\Client\bin\Debug\Client.pdb
+D:\AxibugRCMD\Client\obj\Debug\Client.csproj.AssemblyReference.cache
+D:\AxibugRCMD\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
+D:\AxibugRCMD\Client\obj\Debug\Client.exe
+D:\AxibugRCMD\Client\obj\Debug\Client.pdb
