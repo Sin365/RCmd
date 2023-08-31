@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Net.Sockets;
 using System.Net;
-using System.Net.Sockets;
 using System.Text;
-using System.Threading;
 
 namespace RCmdC
 {
+
     internal class Program
     {
         private static Socket clientSocket = null;
@@ -15,9 +13,44 @@ namespace RCmdC
 
         private static void Main(string[] args)
         {
+            string ip = null;
+            int port = 0;
+
+            bool flag1 = false;
+            do
+            {
+                Console.WriteLine("输入目标IP或域名");
+                string param = Console.ReadLine().Trim();
+                if (!string.IsNullOrEmpty(param))
+                {
+                    ip = param;
+                    flag1 = true;
+                }
+                else
+                {
+                    Console.WriteLine("请正确输入");
+                }
+            } while(!flag1);
+
+            bool flag2 = false;
+            do
+            {
+                Console.WriteLine("输入目标端口");
+                string param = Console.ReadLine().Trim();
+                if (int.TryParse(param, out int _port))
+                {
+                    port = _port;
+                    flag2 = true;
+                }
+                else
+                {
+                    Console.WriteLine("请正确输入");
+                }
+            } while (!flag2);
+
             clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             // 客户端不需要绑定， 需要连接
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 10492);   //服务端IP和端口
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(ip), port);   //服务端IP和端口
             clientSocket.Connect(endPoint);
             Console.WriteLine("连接到服务器");
 

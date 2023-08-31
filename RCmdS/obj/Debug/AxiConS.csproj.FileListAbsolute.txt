@@ -1,6 +1,0 @@
-D:\AxibugRCMD\AxiConS\bin\Debug\Server.exe
-D:\AxibugRCMD\AxiConS\bin\Debug\Server.pdb
-D:\AxibugRCMD\AxiConS\obj\Debug\AxiConS.csproj.AssemblyReference.cache
-D:\AxibugRCMD\AxiConS\obj\Debug\AxiConS.csproj.CoreCompileInputs.cache
-D:\AxibugRCMD\AxiConS\obj\Debug\Server.exe
-D:\AxibugRCMD\AxiConS\obj\Debug\Server.pdb

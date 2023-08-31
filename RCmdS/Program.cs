@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
-using System.Threading;
-using System.IO;
 
 namespace RCmdS
 {
@@ -22,6 +17,18 @@ namespace RCmdS
 
         private static void Main(string[] args)
         {
+            //装载启动参数
+           string[] CmdLineArgs = Environment.GetCommandLineArgs();
+            int port = 10492;
+            if (CmdLineArgs.Count() >= 2 && int.TryParse(CmdLineArgs[1].Trim('/').Trim(), out int result))
+            {
+                port = result;
+            }
+            else
+            {
+                Console.WriteLine("参数错误,使用默认端口。需要指定端口命令 >RCmdS <端口> ");
+
+            }
 
             p = new Process();
             p.StartInfo.FileName = "cmd.exe"; //待执行的文件路径
@@ -33,17 +40,12 @@ namespace RCmdS
             p.Start();
 
             severSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 10492);
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, port);
             severSocket.Bind(endPoint);                 // 绑定
             severSocket.Listen(1);                     // 设置最大连接数
-            Console.WriteLine("开始监听");
-            //Console.WriteLine("进程ID"+Process.GetCurrentProcess().Id);
+            Console.WriteLine($"开始监听 {port}");
             Thread thread = new Thread(ListenClientConnect);        // 开启线程监听客户端连接
             thread.Start("连接成功");
-
-
-            //Thread thread_1 = new Thread(TEST);        // 开启线程监听客户端连接
-            //thread_1.Start("连接成功");
 
             ThreadPool.QueueUserWorkItem(new WaitCallback(delegate
             {
